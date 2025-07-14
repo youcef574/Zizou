@@ -249,7 +249,6 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    right: 0;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
@@ -261,7 +260,13 @@ h1, h2, h3, h4, h5, h6 {
     transition: var(--transition-normal);
     z-index: 100;
     margin-top: var(--space-2);
+    
+    /* Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠ: ÙŠØ¸Ù‡Ø± ÙÙŠ Ø§Ù„Ø¬Ù‡Ø© Ø§Ù„ÙŠØ³Ø±Ù‰ */
+    right: 100%;
+    left: auto;
+    transform: translateX(-10px);
 }
+
 
 .dropdown-menu.active {
     opacity: 1;
