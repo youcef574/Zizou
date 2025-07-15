@@ -135,59 +135,45 @@
             </div>
 
             <!-- Description Section -->
-            <div class="form-section" data-section="description">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-align-left"></i>
-                    </div>
-                    <div class="section-title-container">
-                        <h2 class="section-title" data-key="product_description">Description du produit</h2>
-                        <p class="section-subtitle" data-key="describe_product_detail">Décrivez votre produit en détail</p>
-                    </div>
-                </div>
-                
-                <div class="form-grid">
-                    <div class="form-field full-width">
-                        <label for="shortDescription" data-key="short_description">Description courte</label>
-                        <div class="input-container">
-<div class="input-container">
-    <div id="shortDescriptionEditor" class="quill-editor"></div>
-    <div class="input-icon">
-        <i class="fas fa-align-left"></i>
+<div class="form-section" data-section="description">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-align-left"></i>
+        </div>
+        <div class="section-title-container">
+            <h2 class="section-title" data-key="product_description">Description du produit</h2>
+            <p class="section-subtitle" data-key="describe_product_detail">Décrivez votre produit en détail</p>
+        </div>
     </div>
-    <input type="hidden" name="shortDescription" id="shortDescription">
-</div>
-
-
-                            
-                            <div class="input-icon">
-                                <i class="fas fa-align-left"></i>
-                            </div>
-                        </div>
-                        <div class="error-message" id="shortDescriptionError"></div>
-                    </div>
-                    
-                    <div class="form-field full-width">
-                        <label for="detailedDescription" data-key="detailed_description">Description détaillée</label>
-                        <div class="input-container">
-<div class="input-container">
-    <div id="detailedDescriptionEditor" class="quill-editor large"></div>
-    <div class="input-icon">
-        <i class="fas fa-file-text"></i>
-    </div>
-    <input type="hidden" name="detailedDescription" id="detailedDescription">
-</div>
-
-                            
-                            <div class="input-icon">
-                                <i class="fas fa-file-text"></i>
-                            </div>
-                        </div>
-                        <div class="error-message" id="detailedDescriptionError"></div>
-                    </div>
+    
+    <div class="form-grid">
+        <!-- Short Description -->
+        <div class="form-field full-width">
+            <label for="shortDescription" data-key="short_description">Description courte</label>
+            <div class="input-container">
+                <div id="shortDescriptionEditor" class="quill-editor"></div>
+                <div class="input-icon">
+                    <i class="fas fa-align-left"></i>
                 </div>
+                <input type="hidden" name="shortDescription" id="shortDescription">
             </div>
+            <div class="error-message" id="shortDescriptionError"></div>
+        </div>
 
+        <!-- Detailed Description -->
+        <div class="form-field full-width">
+            <label for="detailedDescription" data-key="detailed_description">Description détaillée</label>
+            <div class="input-container">
+                <div id="detailedDescriptionEditor" class="quill-editor large"></div>
+                <div class="input-icon">
+                    <i class="fas fa-file-text"></i>
+                </div>
+                <input type="hidden" name="detailedDescription" id="detailedDescription">
+            </div>
+            <div class="error-message" id="detailedDescriptionError"></div>
+        </div>
+    </div>
+</div>
             <!-- Image Section -->
             <div class="form-section" data-section="images">
                 <div class="section-header">
