@@ -1379,6 +1379,8 @@ h1, h2, h3, h4, h5, h6 {
 @media print {
     .header,
     .form-actions,
+
+    
     .toast-container,
     .modal-overlay,
     .loading-overlay {
@@ -1395,4 +1397,37 @@ h1, h2, h3, h4, h5, h6 {
         box-shadow: none;
         border: 1px solid #000;
     }
+    .quill-editor {
+    height: 150px;
+    padding-left: var(--space-12); /* حتى لا تغطي الأيقونة */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    font-family: inherit;
+    direction: auto;
+}
+
+.quill-editor.large {
+    height: 250px;
+}
+
+.quill-editor .ql-editor {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: var(--space-3) var(--space-4);
+}
+
+.ql-toolbar {
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+    background: var(--gray-100);
+    border-color: var(--border);
+}
+
+.ql-container {
+    border-color: var(--border);
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+    background: var(--surface);
+}
 }
