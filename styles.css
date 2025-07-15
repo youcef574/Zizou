@@ -247,20 +247,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  inset-inline-end: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: var(--transition-normal);
-  z-index: 100;
-  margin-top: var(--space-2);
+    position: absolute;
+    top: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: var(--transition-normal);
+    z-index: 100;
+    margin-top: var(--space-2);
+    
+    /* الوضع الافتراضي: يظهر في الجهة اليمنى */
+    right: 0;
+    left: auto;
 }
 
 
