@@ -339,5 +339,27 @@
 
     <!-- External JavaScript -->
     <script src="script.js"></script>
+    <script>
+  const shortEditor = new Quill('#shortDescriptionEditor', {
+    theme: 'snow',
+    placeholder: 'Écrire ici / أكتب هنا...',
+  });
+
+  const detailedEditor = new Quill('#detailedDescriptionEditor', {
+    theme: 'snow',
+    placeholder: 'Décrivez le produit en détail / صف المنتج بالتفصيل...',
+  });
+
+  // تفعيل الاتجاه التلقائي لدعم العربية والفرنسية
+  shortEditor.root.setAttribute("dir", "auto");
+  detailedEditor.root.setAttribute("dir", "auto");
+
+  // عند إرسال النموذج، يتم حفظ محتوى المحرر في input مخفي
+  const form = document.getElementById('productForm');
+  form.addEventListener('submit', function () {
+    document.getElementById('shortDescription').value = shortEditor.root.innerHTML;
+    document.getElementById('detailedDescription').value = detailedEditor.root.innerHTML;
+  });
+    </script>
 </body>
 </html>
