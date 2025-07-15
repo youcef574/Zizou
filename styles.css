@@ -1398,36 +1398,295 @@ h1, h2, h3, h4, h5, h6 {
         border: 1px solid #000;
     }
     .quill-editor {
-    height: 150px;
-    padding-left: var(--space-12); /* حتى لا تغطي الأيقونة */
+    min-height: 120px;
+    max-height: none;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--surface);
     font-family: inherit;
     direction: auto;
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+.quill-editor:focus-within {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
 .quill-editor.large {
-    height: 250px;
+    min-height: 200px;
+}
+
+.quill-editor .ql-toolbar {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: var(--gray-50);
+    padding: var(--space-2) var(--space-3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.quill-editor .ql-toolbar .ql-formats {
+    margin-right: var(--space-2);
+}
+
+.quill-editor .ql-toolbar .ql-formats:last-child {
+    margin-right: 0;
+}
+
+.quill-editor .ql-toolbar button {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    margin: 0 1px;
+    transition: var(--transition-fast);
+}
+
+.quill-editor .ql-toolbar button:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.quill-editor .ql-toolbar button.ql-active {
+    background: var(--primary-500);
+    color: white;
+}
+
+.quill-editor .ql-toolbar .ql-picker {
+    color: var(--text-primary);
+}
+
+.quill-editor .ql-toolbar .ql-picker-options {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2);
+}
+
+.quill-editor .ql-toolbar .ql-picker-item:hover {
+    background: var(--surface-hover);
+    border-radius: var(--radius-sm);
+}
+
+.quill-editor .ql-container {
+    border: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    background: var(--surface);
+    font-family: inherit;
+    min-height: 80px;
 }
 
 .quill-editor .ql-editor {
     font-size: 1rem;
     line-height: 1.6;
     padding: var(--space-3) var(--space-4);
+    min-height: 80px;
+    max-height: none;
+    overflow-y: auto;
+    resize: none;
+    color: var(--text-primary);
 }
 
-.ql-toolbar {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
+.quill-editor .ql-editor.ql-blank::before {
+    color: var(--text-muted);
+    font-style: normal;
+    font-size: 1rem;
+    left: var(--space-4);
+    right: var(--space-4);
+}
+
+.quill-editor .ql-editor p {
+    margin-bottom: var(--space-2);
+}
+
+.quill-editor .ql-editor p:last-child {
+    margin-bottom: 0;
+}
+
+.quill-editor .ql-editor h1,
+.quill-editor .ql-editor h2,
+.quill-editor .ql-editor h3,
+.quill-editor .ql-editor h4,
+.quill-editor .ql-editor h5 {
+    font-family: var(--font-family-display);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.quill-editor .ql-editor h1:first-child,
+.quill-editor .ql-editor h2:first-child,
+.quill-editor .ql-editor h3:first-child,
+.quill-editor .ql-editor h4:first-child,
+.quill-editor .ql-editor h5:first-child {
+    margin-top: 0;
+}
+
+.quill-editor .ql-editor ul,
+.quill-editor .ql-editor ol {
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-6);
+}
+
+.quill-editor .ql-editor li {
+    margin-bottom: var(--space-1);
+}
+
+.quill-editor .ql-editor blockquote {
+    border-left: 4px solid var(--primary-300);
+    padding-left: var(--space-4);
+    margin: var(--space-4) 0;
+    background: var(--primary-50);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.quill-editor .ql-editor code {
     background: var(--gray-100);
-    border-color: var(--border);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--error-700);
 }
 
-.ql-container {
-    border-color: var(--border);
-    border-bottom-left-radius: var(--radius-lg);
-    border-bottom-right-radius: var(--radius-lg);
+.quill-editor .ql-editor pre {
+    background: var(--gray-900);
+    color: var(--gray-100);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    margin: var(--space-4) 0;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.quill-editor .ql-editor a {
+    color: var(--primary-600);
+    text-decoration: underline;
+    transition: var(--transition-fast);
+}
+
+.quill-editor .ql-editor a:hover {
+    color: var(--primary-700);
+}
+
+/* تحسين الأيقونة في حقول المحرر */
+.form-field .input-container .input-icon {
+    top: 45px;
+    z-index: 5;
     background: var(--surface);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-field .input-container:focus-within .input-icon {
+    border-color: var(--border-focus);
+    color: var(--border-focus);
+}
+
+/* تحسين التخطيط للحقول التي تحتوي على محرر */
+.form-field.full-width .input-container {
+    position: relative;
+}
+
+.form-field.full-width .quill-editor {
+    width: 100%;
+}
+
+/* تحسين الاستجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .quill-editor .ql-toolbar {
+        padding: var(--space-2);
+        flex-wrap: wrap;
+    }
+    
+    .quill-editor .ql-toolbar .ql-formats {
+        margin-bottom: var(--space-1);
+    }
+    
+    .quill-editor .ql-toolbar button {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .quill-editor .ql-editor {
+        padding: var(--space-3);
+        min-height: 100px;
+    }
+    
+    .form-field .input-container .input-icon {
+        top: 50px;
+    }
+}
+
+/* تحسين الألوان في الوضع المظلم (إذا تم إضافته لاحقاً) */
+@media (prefers-color-scheme: dark) {
+    .quill-editor .ql-toolbar {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+    
+    .quill-editor .ql-container {
+        background: var(--gray-900);
+        border-color: var(--gray-700);
+    }
+    
+    .quill-editor .ql-editor {
+        color: var(--gray-100);
+    }
+    
+    .quill-editor .ql-editor.ql-blank::before {
+        color: var(--gray-400);
+    }
+}
+
+/* تحسين التمرير السلس */
+.quill-editor .ql-editor {
+    scroll-behavior: smooth;
+}
+
+/* تحسين التركيز */
+.quill-editor .ql-editor:focus {
+    outline: none;
+}
+
+/* تحسين عرض الصور في المحرر */
+.quill-editor .ql-editor img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: var(--space-2) 0;
+}
+
+/* تحسين الجداول في المحرر */
+.quill-editor .ql-editor table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--space-4) 0;
+}
+
+.quill-editor .ql-editor table td,
+.quill-editor .ql-editor table th {
+    border: 1px solid var(--border);
+    padding: var(--space-2) var(--space-3);
+    text-align: right;
+}
+
+.quill-editor .ql-editor table th {
+    background: var(--gray-100);
+    font-weight: 600;
 }
 }
