@@ -327,42 +327,112 @@
     <script src="script.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script>
-  const toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'header': [1, 2, 3, 4, 5, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'color': [] }, { 'background': [] }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'align': [] }],
-    ['blockquote', 'code-block'],
-    ['link', 'image'],
-    ['clean']
-  ];
+        // إعداد شريط الأدوات للمحرر المختصر
+        const shortToolbarOptions = [
+            [{ 'header': [3, 4, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'color': [] }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'align': [] }],
+            ['link'],
+            ['clean']
+        ];
+        
+        // إعداد شريط الأدوات للمحرر المفصل
+        const detailedToolbarOptions = [
+            [{ 'font': [] }],
+            [{ 'header': [1, 2, 3, 4, 5, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'align': [] }],
+            ['blockquote', 'code-block'],
+            ['link', 'image'],
+            ['clean']
+        ];
 
-  const shortEditor = new Quill('#shortDescriptionEditor', {
-    theme: 'snow',
-    modules: {
-      toolbar: toolbarOptions
-    },
-    placeholder: 'Short description (FR / EN / AR) - Description courte...'
-  });
+        // إنشاء محرر الوصف المختصر
+        const shortEditor = new Quill('#shortDescriptionEditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: shortToolbarOptions
+            },
+            placeholder: 'اكتب وصفاً مختصراً للمنتج... (FR / EN / AR)',
+            bounds: '#shortDescriptionEditor'
+        });
 
-  const detailedEditor = new Quill('#detailedDescriptionEditor', {
-    theme: 'snow',
-    modules: {
-      toolbar: toolbarOptions
-    },
-    placeholder: 'Detailed description (FR / EN / AR) - Description détaillée...'
-  });
+        // إنشاء محرر الوصف المفصل
+        const detailedEditor = new Quill('#detailedDescriptionEditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: detailedToolbarOptions
+            },
+            placeholder: 'اكتب وصفاً مفصلاً للمنتج مع جميع التفاصيل المهمة... (FR / EN / AR)',
+            bounds: '#detailedDescriptionEditor'
+        });
 
-  shortEditor.root.setAttribute("dir", "auto");
-  detailedEditor.root.setAttribute("dir", "auto");
+        // تعيين الاتجاه التلقائي للنص
+        shortEditor.root.setAttribute("dir", "auto");
+        detailedEditor.root.setAttribute("dir", "auto");
+        
+        // تحديث الحقول المخفية عند التغيير
+        shortEditor.on('text-change', function() {
+            document.getElementById('shortDescription').value = shortEditor.root.innerHTML;
+            // تحديث شريط التقدم
+            if (typeof calculateProgress === 'function') {
+                calculateProgress();
+            }
+        });
+        
+        detailedEditor.on('text-change', function() {
+            document.getElementById('detailedDescription').value = detailedEditor.root.innerHTML;
+            // تحديث شريط التقدم
+            if (typeof calculateProgress === 'function') {
+                calculateProgress();
+            }
+        });
+        
+        // تحديث الحقول المخفية عند إرسال النموذج
+        document.getElementById('productForm').addEventListener('submit', function () {
+            document.getElementById('shortDescription').value = shortEditor.root.innerHTML;
+            document.getElementById('detailedDescription').value = detailedEditor.root.innerHTML;
+        });
+        
+        // تحسين الاستجابة للتغيير في حجم المحتوى
+        function adjustEditorHeight(editor) {
+            const editorContainer = editor.container;
+            const editorElement = editor.root;
+            
+            // تعيين الحد الأدنى للارتفاع
+            const minHeight = editorContainer.classList.contains('large') ? 200 : 120;
+            
+            // حساب الارتفاع المطلوب
+            const scrollHeight = editorElement.scrollHeight;
+            const currentHeight = editorElement.offsetHeight;
+            
+            if (scrollHeight > currentHeight) {
+                editorElement.style.height = Math.max(scrollHeight, minHeight) + 'px';
+            }
+        }
+        
+        // تطبيق التعديل التلقائي للارتفاع
+        shortEditor.on('text-change', function() {
+            setTimeout(() => adjustEditorHeight(shortEditor), 0);
+        });
+        
+        detailedEditor.on('text-change', function() {
+            setTimeout(() => adjustEditorHeight(detailedEditor), 0);
+        });
+        
+        // تعديل الارتفاع عند التحميل الأولي
+        setTimeout(() => {
+            adjustEditorHeight(shortEditor);
+            adjustEditorHeight(detailedEditor);
+        }, 100);
 
-  document.getElementById('productForm').addEventListener('submit', function () {
-    document.getElementById('shortDescription').value = shortEditor.root.innerHTML;
-    document.getElementById('detailedDescription').value = detailedEditor.root.innerHTML;
-  });
     </script>
 </body>
-</html>
+                </html>
+                            
