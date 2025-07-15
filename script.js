@@ -329,11 +329,15 @@ function validateField(fieldName, value, showError = true) {
     if (!rules) return true;
     
     const field = document.getElementById(fieldName);
+    const quillContainer = document.querySelector(`#${fieldName}Editor`);
     const errorElement = document.getElementById(fieldName + 'Error');
     
     // Clear previous validation state
     if (field) {
         field.classList.remove('valid', 'invalid');
+    }
+    if (quillContainer) {
+        quillContainer.classList.remove('valid', 'invalid');
     }
     if (errorElement) {
         errorElement.classList.remove('show');
@@ -351,6 +355,7 @@ function validateField(fieldName, value, showError = true) {
     // Skip other validations if field is empty and not required
     if (!value || value.toString().trim() === '') {
         if (field) field.classList.add('valid');
+        if (quillContainer) quillContainer.classList.add('valid');
         return true;
     }
     
@@ -392,17 +397,26 @@ function validateField(fieldName, value, showError = true) {
     if (field) {
         field.classList.add('valid');
     }
+    if (quillContainer) {
+        quillContainer.classList.add('valid');
+    }
     
     return true;
 }
 
 function showFieldError(fieldName, message) {
     const field = document.getElementById(fieldName);
+    const quillContainer = document.querySelector(`#${fieldName}Editor`);
     const errorElement = document.getElementById(fieldName + 'Error');
     
     if (field) {
         field.classList.add('invalid');
         field.classList.remove('valid');
+    }
+    
+    if (quillContainer) {
+        quillContainer.classList.add('invalid');
+        quillContainer.classList.remove('valid');
     }
     
     if (errorElement) {
